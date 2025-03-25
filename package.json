@@ -1,0 +1,20 @@
+{
+  "name": "devtinder_be",
+  "version": "1.0.0",
+  "description": "dev",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "keywords": [
+    "nodejs",
+    "javascript",
+    "backend"
+  ],
+  "author": "Ashutosh Johri",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
