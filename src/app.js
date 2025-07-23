@@ -3,7 +3,11 @@ const connectDB = require("./config/database");
 const app = express();
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+const http = require("http");
+
+
 require("dotenv").config();
+// require('./util/cronJob');
 
 app.use(
   cors({
@@ -19,16 +23,22 @@ const authRouter = require("./routes/auth");
 const profileRouter = require("./routes/profile");
 const requestRouter = require("./routes/request");
 const userRouter = require("./routes/user");
+const paymentRouter = require("./routes/payment");
+const initializeSocketServer = require("./util/socket");
 
 app.use("/", authRouter);
 app.use("/", profileRouter);
 app.use("/", requestRouter);
 app.use("/", userRouter);
+app.use("/", paymentRouter);
+
+const server = http.createServer(app);
+initializeSocketServer(server)
 
 connectDB()
   .then(() => {
     console.log("Database connect successfully");
-    app.listen(process.env.PORT, () => {
+    server.listen(process.env.PORT, () => {
       console.log(`Listening on port ${process.env.PORT}...`);
     });
   })
